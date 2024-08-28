@@ -11,6 +11,7 @@ import lombok.NonNull;
 public class Contact {
     @NonNull
     private String name;
+    @NonNull
     private int phoneNumber;
 
 

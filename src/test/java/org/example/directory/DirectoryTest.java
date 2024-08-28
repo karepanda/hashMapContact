@@ -2,7 +2,6 @@ package org.example.directory;
 
 import org.example.contact.Contact;
 import org.example.exception.ContactException;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,33 +9,28 @@ import static org.junit.jupiter.api.Assertions.*;
 class DirectoryTest {
     @Test
     void givenContactWhenAddContactIsNullThenReturnContactException() {
+        //Act and Assert
         assertThrows(ContactException.class, ()->Directory.addContact(null));
     }
 
     @Test
-    @DisplayName("Throw ContactException with message name not null")
-    void givenContactWhenNameIsNullThenThrowException(){
-
-    }
-    @Test
-    @DisplayName("Throw ContactException with message phoneNumber not null")
-    void givenContactWhenPhoneIsNullThenThrowException(){
-
-    }
-
-    @Test
     void givenContactWhenContactIsValidThenReturnContact(){
+        //Arrange
         Contact contactExpected= Contact.builder()
                 .name("name")
                 .phoneNumber(0)
                 .build();
+
+        //Act
         Contact result = Directory.addContact(contactExpected);
 
+        //Assert
         assertEquals(contactExpected,result);
     }
 
     @Test
     void givenContactSearchWhenContactIsNullThenThrowsException(){
+        //Act and Assert
         assertThrows(ContactException.class, () ->Directory.search(null));
     }
 
