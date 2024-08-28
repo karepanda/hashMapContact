@@ -19,4 +19,11 @@ public class Directory {
         return directory.get(contact.getName());
     }
 
+    public static boolean search(Contact contact){
+        if (contact == null){
+            throw new ContactException("The contact can't be null");
+        }
+        return directory.containsKey(contact.getName());
+    }
+
 }
