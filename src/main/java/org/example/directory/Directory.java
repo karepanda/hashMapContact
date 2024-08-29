@@ -8,22 +8,35 @@ import java.util.HashMap;
 
 @ToString
 public class Directory {
-    private static HashMap<String, Contact> directory = new HashMap<>();
+    private static HashMap<String, Contact> contactMap = new HashMap<>();
 
     public static Contact addContact (Contact contact) {
         if (contact == null){
             throw new ContactException("The contact can't be null");
         }
-        directory.put(contact.getName(), contact);
+        contactMap.put(contact.getName(), contact);
 
-        return directory.get(contact.getName());
+        return findContactByName(contact.getName());
     }
 
-    public static boolean search(Contact contact){
+    public static Contact findContactByName(String name){
+        final Contact contact = contactMap.get(name);
+
         if (contact == null){
             throw new ContactException("The contact can't be null");
         }
-        return directory.containsKey(contact.getName());
+        return contact;
     }
+
+    public static void deleteContactByName(String name){
+
+        if(name == null || contactMap.remove(name) == null){
+            throw new ContactException("The contact does not exist");
+        }
+
+    }
+
+
+
 
 }
