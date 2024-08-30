@@ -110,4 +110,34 @@ class DirectoryTest {
         assertThrows(ContactException.class, () -> Directory.deleteContactByName(null));
     }
 
+    @Test
+    void givenContactWhenUpdateContactPhoneNumberIsEmptyThenReturnException(){
+        //Act & Assert
+        assertThrows(ContactException.class, () -> Directory.updateContactPhoneNumber("", 0));
+    }
+
+    @Test
+    void givenContactWhenUpdateContactPhoneNumberIsNullThenReturnException(){
+        //Act & Assert
+        assertThrows(ContactException.class, () -> Directory.updateContactPhoneNumber(null,0));
+    }
+
+    @Test
+    void givenContactWhenUpdateContactPhoneNumberExistsThenReturnContact(){
+        //Arrange
+        final String nameExpected = "name";
+        Contact contactExpected= Contact.builder()
+                .name(nameExpected)
+                .phoneNumber(0)
+                .build();
+        Directory.addContact(contactExpected);
+
+        //Act
+        Directory.updateContactPhoneNumber(nameExpected,123);
+        Contact result = Directory.findContactByName(nameExpected);
+
+        //Assert
+        assertEquals(123, result.getPhoneNumber());
+    }
+
 }
